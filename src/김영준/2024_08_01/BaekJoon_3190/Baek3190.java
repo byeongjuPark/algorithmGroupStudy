@@ -171,17 +171,11 @@ class Snake {
 		for (int i = 0; i < count; i++) {
 			Location body = bodys.poll();
 
-//			System.out.println("현재 바디 위치"+body.x);
-//			System.out.println("현재 바디 위치"+body.y);
-
 			int currentX = body.x;
 			int currentY = body.y;
 
 			body.x = beforeX;
 			body.y = beforeY;
-
-//			System.out.println("움직인 바디 위치"+body.x);
-//			System.out.println("움직인 바디 위치"+body.y);
 
 			beforeX = currentX;
 			beforeY = currentY;
