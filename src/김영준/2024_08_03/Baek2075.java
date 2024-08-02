@@ -2,7 +2,7 @@
 import java.util.*;
 import java.io.*;
 
-public class MaBaek2075in {
+public class Baek2075 {
 	static List<Integer> numbers;
 	static int N;
 	public static void main(String[] args) throws IOException {
