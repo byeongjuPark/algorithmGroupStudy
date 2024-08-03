@@ -67,10 +67,6 @@ public class Boj14503 {
                 int nc = c + delta[i][1];
                 if (nr >= 0 && nc >= 0 && nr < n && nc < m) {
                     if (table[nr][nc] == 0) {
-                        // --
-                        r = nr;
-                        c = nc;
-                        // --
                         isTrash = true;
                         break;
                     }
