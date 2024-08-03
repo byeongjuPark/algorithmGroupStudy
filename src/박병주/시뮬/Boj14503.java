@@ -17,7 +17,7 @@ public class Boj14503 {
     static StringTokenizer st;
     // 0인 경우 북쪽, 1인 경우 동쪽, 2인 경우 남쪽, 3인 경우 서쪽
     // 북0 -> 서1 -> 남2 -> 동3 -> 북1
-    //
+
     static int[][] delta = { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
     static int result = 0;
 
@@ -48,6 +48,12 @@ public class Boj14503 {
             for (int j = 0; j < m; j++) {
                 table[i][j] = Integer.parseInt(st.nextToken());
             }
+        }
+        // 순서가 반시계방향으로 조정된 것 적용
+        if (dir == 1) {
+            dir = 3;
+        } else if (dir == 3) {
+            dir = 1;
         }
     }
 
