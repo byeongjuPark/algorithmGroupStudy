@@ -52,7 +52,7 @@ public class Swea1226 {
                     int nr = r + delta[k][0];
                     int nc = c + delta[k][1];
                     //문제 ) 첫 시작점을 노드에 넣게 되면 peek로 검사했을때 걸린다.
-                    //해결 방안 -> ? 
+                    //해결 방안 -> visited 체크
                     if(nr >= 0 && nc >= 0 && nr < MAP_SIZE && nc < MAP_SIZE && map[nr][nc] != 1 && !visited[nr][nc]){
                         //&& nNode.r != queue.peek().r && nNode.c !=queue.peek().c // 첫 노드에 걸림
                          
