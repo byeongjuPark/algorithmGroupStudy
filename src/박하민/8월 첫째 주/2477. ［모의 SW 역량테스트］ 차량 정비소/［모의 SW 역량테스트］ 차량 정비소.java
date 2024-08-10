@@ -10,6 +10,7 @@ class Target {
     }
 }
 
+//recption과 repair용 카운터
 class Box {
     int time;
     int runningTime;
@@ -25,24 +26,30 @@ class Box {
         this.customerNum = customerNum;
     }
     
+    //시간을 흐르게 하는 메서드
     int isTimeUp() {
-        //사람이 있으면 -1 or 사람 num
         if(customerNum != -1) {
+            //사람이 있으면 시간+1
             runningTime+=1;
+
+            //정해진 시간이 끝나면
             if(time <= runningTime) {
+                //시간, 사람 변수 리셋
                 runningTime =0;
                 int tmp = customerNum;
                 customerNum = -1;
+                //사람 번호 리턴
                 return tmp;
             }
+            //정해진 시간이 끝나지 않았다면 -1 리턴
             else {
                 return -1;
             }
         }
-        //사람이 없으면 return -2
+
+        //사람이 들어있지 않으면 return -2
         return -2;
     }
-    
 }
 
 public class Solution {
@@ -52,7 +59,6 @@ public class Solution {
         StringBuilder sb = new StringBuilder();
 
         for(int tc = 0; tc<T; tc++) {
-
             int receptionNum=0;
             int repairNum=0;
             int customerNum=0;
@@ -92,11 +98,24 @@ public class Solution {
             
             int customerKey = 1;
             int time = 0;
+
+            //모든사람이 빠져나갔는지 확인하는 flag
             boolean closed = false;
 
+            /*  1. 손님 도착 큐의 peek()과 시간이 맞으면 poll()하여 receptionQueue에 등록
+             *  2. receptionBox가 비어있다면 receptionQueue에서 손님을 뽑아 등록
+             *  3. receptionBox의 시간이 흐르고 시간이 다 되었다면 손님을 repairQueue에 등록
+             *     이때 다음 시간이 흐를때 맞추기위해 receptionBox에서 손님을 빼냄과 동시에 
+             *     receptionQueue에서 손님을 뽑아 등록
+             *  4. 손님이 targetReception을 지났다면 targetList에 저장해둠
+             *  5. repairBox가 비어있다면 repairQueue에서 손님을 뽑아 등록
+             *  6. repairBox의 시간이 흐르고 시간이 다 되었다면 손님을 빼내 targetList와 비교하고 target인지 확인
+             *     이때 다음 시간이 흐를때 맞추기위해 repairBox에서 손님을 빼냄과 동시에 
+             *     repairQueue에서 손님을 뽑아 등록
+             */
             while(true) {
-                
-                //손님도착 리스트확인하여 a큐에 등록
+
+                // 1
                 if(customerIncomeTime.peek()!=null) {
                     while(customerIncomeTime.peek()==time) {
                         customerIncomeTime.poll();
@@ -107,35 +126,38 @@ public class Solution {
                     }
                 }
 
-                //receptionbox 시간업하여 return이 -2(빈칸)인경우 리셉션 등록
-    
+                
+                
                 for(int i = 0; i<receptionBoxList.size(); i++) {
-    
+
+                    //시간 흐름
                     int tmp = receptionBoxList.get(i).isTimeUp();
-    
                     
+                    //박스에서 손님이 꺼내졌는가?
                     if (tmp != -1 && tmp != -2) {
+                        //다음 큐에 등록
                         repairQueue.add(tmp);
+                        //박스에 손님 다시 넣기
                         if(!receptionQueue.isEmpty()) {
                         receptionBoxList.get(i).setCustomerNum(receptionQueue.poll());
                         }
 
+                        //타겟인지 확인
                         if(i+1 == targetReception) {
                             targets.add(new Target(tmp));
                         }
                     }
+                    //박스가 원래 빈칸이었다면
                     if(tmp == -2 && !receptionQueue.isEmpty()) {
+                        //박스에 손님 넣기
                         receptionBoxList.get(i).setCustomerNum(receptionQueue.poll()); 
                     }
-                    
                 }
-    
     
                 for(int i = 0; i<repairBoxList.size(); i++) {
     
                     int tmp = repairBoxList.get(i).isTimeUp();
     
-                    
                     if (tmp != -1 && tmp != -2) {
                         //집에감
                         if(i+1 == targetRepair) {
