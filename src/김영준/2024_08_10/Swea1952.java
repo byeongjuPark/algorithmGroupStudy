@@ -64,7 +64,9 @@ class Swea1952{
 
 
 		for(int i = 1 ; i<=12; i++) {
+			//1월부터 12월까지 최소한의 금액으로 이용하는거 업데이트
 			dp[i] = dp[i-1] + Math.min(realCosts[i-1][0],realCosts[i-1][1]);
+			//3월이상부터는 3월 이용권 사용가능
 			if(i>=3) {
 				dp[i] = Math.min(dp[i],dp[i-3]+realCosts[i-1][2]);
 			}
