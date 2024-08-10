@@ -48,12 +48,11 @@ public class Swea1767 {
                 }
             }
 
-            // dfs(프로세스위치, 프로세스 시작 위치, 초기 맵, 누적합 값)
             result = Integer.MAX_VALUE;
             maxCore = 0;
             // dfs(processes, 0, map, 0);
             dfs2(processes, 0, map, 0, 0, 0);
-            System.out.println("#" + t + " " + result + ", cor : " + maxCore);
+            System.out.println("#" + t + " " + result);
 
         }
     }
