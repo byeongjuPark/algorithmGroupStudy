@@ -72,6 +72,7 @@ class Swea1952{
 			}
 		}
 
+
 		return Math.min(dp[12],realCosts[11][3]);
 	}
 }
