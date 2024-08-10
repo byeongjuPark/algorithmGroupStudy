@@ -62,6 +62,7 @@ class Swea1952{
 			realCosts[i][3] = costs[3];
 		}
 
+
 		for(int i = 1 ; i<=12; i++) {
 			dp[i] = dp[i-1] + Math.min(realCosts[i-1][0],realCosts[i-1][1]);
 			if(i>=3) {
