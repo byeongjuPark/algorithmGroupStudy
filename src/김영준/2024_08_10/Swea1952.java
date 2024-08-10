@@ -71,8 +71,6 @@ class Swea1952{
 				dp[i] = Math.min(dp[i],dp[i-3]+realCosts[i-1][2]);
 			}
 		}
-
-
 		return Math.min(dp[12],realCosts[11][3]);
 	}
 }
