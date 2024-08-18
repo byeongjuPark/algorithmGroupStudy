@@ -1,11 +1,13 @@
+package BJ_NM;
 import java.io.*;
 import java.util.*;
-
-public class Main_BJ_15651 {
+public class Main_BJ_15656 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
-	static int N, M;
 	static StringBuilder sb = new StringBuilder();
+	
+	static int N,M;
+	static int[] narr;
 	static int[] arr;
 	
 	public static void main(String[] args) throws Exception {
@@ -13,25 +15,31 @@ public class Main_BJ_15651 {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		
+		narr = new int[N];
+		st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < N; i++) {
+			narr[i] = Integer.parseInt(st.nextToken());
+		}
+		Arrays.sort(narr);
+		
 		arr = new int[M];
 		perm(0);
-		System.out.println(sb);
+		System.out.println(sb);		
 	}
 
-	private static void perm(int m) {
-		if (m == M) {
-			for (int i = 0; i < m; i++) {
+	private static void perm(int idx) {
+		if(idx == M) {
+			for (int i = 0; i < M; i++) {
 				sb.append(arr[i] + " ");
 			}
 			sb.append("\n");
 			return;
 		}
 		
-		for (int i = 1; i <= N; i++) {
-			arr[m] = i;
-			perm(m+1);
+		for (int i = 0; i < N; i++) {
+			arr[idx] = narr[i];
+			perm(idx+1);
 		}
-		
 		
 	}
 
